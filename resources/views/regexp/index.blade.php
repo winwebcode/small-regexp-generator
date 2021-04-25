@@ -13,11 +13,11 @@
             <h1 class="mt-5">Regexp generator</h1>
 
             <div class="container">
-                <input type="text" placeholder="Перед искомым текстом всегда есть" name="beforeText">
-                <input type="text" placeholder="Искомый текст всегда начинается с" name="textStart">
-                <input type="text" placeholder="Это идёт после искомого текста" name="afterText">
-                <input type="text" placeholder="Этим заканчивается искомый текст" name="textFinish">
-                <button type="submit">Generate</button>
+                <input type="text" placeholder="Перед искомым текстом всегда есть" name="beforeText"><br><br>
+                <input type="text" placeholder="Искомый текст всегда начинается с" name="textStart"><br><br>
+                <input type="text" placeholder="Это идёт после искомого текста" name="afterText"><br><br>
+                <input type="text" placeholder="Этим заканчивается искомый текст" name="textFinish"><br><br>
+                <button type="submit">Generate</button><br>
             </div>
 
 
