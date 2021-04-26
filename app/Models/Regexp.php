@@ -11,13 +11,11 @@ class Regexp extends Model
 
     public function getRegexp($request)
     {//generate regexp
-       // dd($request);
+
         if($request->beforeText == null && $request->textStart == null && $request->textFinish == null && $request->afterText == null) {
             return $regexp = ".+";
         }
         else {
-
-
             $beforeText = $this->beforeText($request->beforeText); //перед искомым текстом
             $textStart = $this->textStart($request->textStart); //искомый текст
             $textFinish = $this->textFinish($request->textFinish);  //Этим заканчивается искомый текст
