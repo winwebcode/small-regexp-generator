@@ -17,4 +17,6 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 
-Route::get('/', 'HomeController@index')->name('regexp');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/regex-complete', 'HomeController@getRegex')->name('regex.complete');
+Route::post('/regex-store', 'HomeController@storeRegex')->name('regexp.create');
