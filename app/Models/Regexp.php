@@ -11,23 +11,31 @@ class Regexp extends Model
 
     public function getRegexp($request)
     {//generate regexp
-        $beforeText = $this->beforeText($request->beforeText); //перед искомым текстом
-        $textStart = $this->textStart($request->textStart); //искомый текст
-        $textFinish = $this->textFinish($request->textFinish);  //Этим заканчивается искомый текст
-        $afterText = $this->afterText($request->afterText); //после искомого текста
-
-        if($request->shortestMatch == "on") {
-            $textFinish = "?$textFinish";
+       // dd($request);
+        if($request->beforeText == null && $request->textStart == null && $request->textFinish == null && $request->afterText == null) {
+            return $regexp = ".+";
         }
+        else {
 
-        if($request->textWrap == "on") { //allow wrap
-            $textStart = "{$textStart}[\w\W]*";
-        } else { //no wrap
-            $textStart = "{$textStart}.*";
+
+            $beforeText = $this->beforeText($request->beforeText); //перед искомым текстом
+            $textStart = $this->textStart($request->textStart); //искомый текст
+            $textFinish = $this->textFinish($request->textFinish);  //Этим заканчивается искомый текст
+            $afterText = $this->afterText($request->afterText); //после искомого текста
+
+            if ($request->shortestMatch == "on") {
+                $textFinish = "?$textFinish";
+            }
+
+            if ($request->textWrap == "on") { //allow wrap
+                $textStart = "{$textStart}[\w\W]*";
+            } else { //no wrap
+                $textStart = "{$textStart}.*";
+            }
+            //сборка и возврат результата
+            $regexp = "{$beforeText}{$textStart}{$textFinish}{$afterText}";
+            return $regexp;
         }
-        //сборка и возврат результата
-        $regexp = "{$beforeText}{$textStart}{$textFinish}{$afterText}";
-        return $regexp;
     }
 
     public function beforeText($beforeText)

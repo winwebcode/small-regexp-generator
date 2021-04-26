@@ -17,9 +17,9 @@
                 <input type="text" size="50" placeholder="Искомый текст всегда начинается с" name="textStart"><br><br>
                 <input type="text" size="50" placeholder="Это идёт после искомого текста" name="afterText"><br><br>
                 <input type="text" size="50" placeholder="Этим заканчивается искомый текст" name="textFinish"><br><br>
-                <label>Разрешить переносы текста</label><br><br>
+                <label>Разрешить переносы текста</label>
                 <input type="checkbox" name="textWrap" unchecked><br><br>
-                <label>Самое короткое совпадение</label><br><br>
+                <label>Самое короткое совпадение</label>
                 <input type="checkbox" name="shortestMatch" unchecked><br><br>
                 <button type="submit">Generate</button><br>
             </div>
