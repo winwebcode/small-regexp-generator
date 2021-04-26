@@ -16,7 +16,7 @@ class Regexp extends Model
         $textStart = $this->textStart($request->textStart); //искомый текст
         $textFinish = $this->textFinish($request->textFinish);  //Этим заканчивается искомый текст
         $afterText = $this->afterText($request->afterText); //после искомого текста
-        
+
         if($request->shortMatch == "checked") {
             $textFinish = "?$textFinish";
         }
