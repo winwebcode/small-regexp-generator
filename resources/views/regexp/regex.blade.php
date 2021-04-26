@@ -13,8 +13,8 @@
             <h1 class="mt-5">Regexp generator</h1>
 
             <div class="container">
-                <textarea>{{$result}}</textarea>
-                <button type="submit">Generate</button><br>
+                <b><label>Ваше регулярное выражение готово!</label></b><br><br>
+                <textarea rows="4" cols="50">{{$result}}</textarea>
             </div>
 
 
