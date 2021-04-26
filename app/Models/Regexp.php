@@ -16,9 +16,7 @@ class Regexp extends Model
         $textStart = $this->textStart($request->textStart); //искомый текст
         $textFinish = $this->textFinish($request->textFinish);  //Этим заканчивается искомый текст
         $afterText = $this->afterText($request->afterText); //после искомого текста
-
-
-
+        
         if($request->shortMatch == "checked") {
             $textFinish = "?$textFinish";
         }
@@ -32,99 +30,88 @@ class Regexp extends Model
         //разбор строки по кускам и замена символов типа слэша
         $strArray = str_split($beforeText);
         //в цикле проходим по массиву символов, ищем спец. символы и заменяем их
-        foreach ($strArray as $symbol) {
-            $newString[] = $this->specReplacer($symbol);
+        $result = $this->specReplacer($strArray);
 
-        }
-        $newString = implode($newString);
-
-        return $result = "(?<=$newString)";
+        return $result = "(?<=$result)";
     }
 
     public function afterText($afterText)
     {//после искомого текста
         $strArray = str_split($afterText);
         //в цикле проходим по массиву символов, ищем спец. символы и заменяем их
-        foreach ($strArray as $symbol) {
-            $newString[] = $this->specReplacer($symbol);
-        }
-        $newString = implode($newString);
+        $result = $this->specReplacer($strArray);
 
-    return $result = "(?=$newString)";
+    return $result = "(?=$result)";
     }
 
     public function textStart($textStart)
     {//искомый текст
         $strArray = str_split($textStart); //string to array
+        $result = $this->specReplacer($strArray);
 
-        foreach ($strArray as $symbol) {
-            $newString[] = $this->specReplacer($symbol); //ищем спец. символы и заменяем их
-        }
-        $newString = implode($newString);
-
-        return $result = "$newString.*";
+        return $result = "$result.*";
     }
 
     public function textFinish($textFinish)
     {//Этим заканчивается искомый текст
         $strArray = str_split($textFinish);
         //в цикле проходим по массиву символов, ищем спец. символы и заменяем их
-        foreach ($strArray as $symbol) {
-            $newString[] = $this->specReplacer($symbol);
+        $result = $this->specReplacer($strArray);
 
-        }
-        $newString = implode($newString);
-        return $result = "$newString";
+        return $result = "$result";
     }
 
-
-    public function specReplacer($symbol)
+    public function specReplacer($strArray)
     {
-        // экранирование . ^ $ * + ? { } [ ] \ | ( )
-        switch ($symbol) {
-            case ".":
-                $symbol = "\\.";
-                break;
-            case "^":
-                $symbol = "\\^";
-                break;
-            case '$':
-                $symbol = "\\$";
-                break;
-            case '*':
-                $symbol = "\\*";
-                break;
-            case '+':
-                $symbol = "\\+";
-                break;
-            case '?':
-                $symbol = "\\?";
-                break;
-            case '{':
-                $symbol = "\\{";
-                break;
-            case '}':
-                $symbol = "\\}";
-                break;
-            case '[':
-                $symbol = "\\[";
-                break;
-            case ']':
-                $symbol = "\\]";
-                break;
-            case '\\':
-                $symbol = "\\\\";
-                break;
-            case '|':
-                $symbol = "\\|";
-                break;
-            case '(':
-                $symbol = "\\(";
-                break;
-            case ')':
-                $symbol = "\\)";
-                break;
+        foreach ($strArray as $symbol) {
+            // экранирование . ^ $ * + ? { } [ ] \ | ( )
+            switch ($symbol) {
+                case ".":
+                    $symbol = "\\.";
+                    break;
+                case "^":
+                    $symbol = "\\^";
+                    break;
+                case '$':
+                    $symbol = "\\$";
+                    break;
+                case '*':
+                    $symbol = "\\*";
+                    break;
+                case '+':
+                    $symbol = "\\+";
+                    break;
+                case '?':
+                    $symbol = "\\?";
+                    break;
+                case '{':
+                    $symbol = "\\{";
+                    break;
+                case '}':
+                    $symbol = "\\}";
+                    break;
+                case '[':
+                    $symbol = "\\[";
+                    break;
+                case ']':
+                    $symbol = "\\]";
+                    break;
+                case '\\':
+                    $symbol = "\\\\";
+                    break;
+                case '|':
+                    $symbol = "\\|";
+                    break;
+                case '(':
+                    $symbol = "\\(";
+                    break;
+                case ')':
+                    $symbol = "\\)";
+                    break;
+            }
+            $newString[] = $symbol;
         }
-        return $symbol;
+        $newString = implode($newString);
+        return $newString;
     }
 }
