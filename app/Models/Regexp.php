@@ -9,37 +9,39 @@ class Regexp extends Model
 {
     use HasFactory;
 
-    public function symbolReplacer($request)
-    {
-
+    public function getRegexp($request)
+    {//generate regexp
         $beforeText = $this->beforeText($request->beforeText); //перед искомым текстом
         $textStart = $this->textStart($request->textStart); //искомый текст
         $textFinish = $this->textFinish($request->textFinish);  //Этим заканчивается искомый текст
         $afterText = $this->afterText($request->afterText); //после искомого текста
 
-        if($request->shortMatch == "checked") {
+        if($request->shortestMatch == "on") {
             $textFinish = "?$textFinish";
         }
+
+        if($request->textWrap == "on") { //allow wrap
+            $textStart = "{$textStart}[\w\W]*";
+        } else { //no wrap
+            $textStart = "{$textStart}.*";
+        }
         //сборка и возврат результата
-        $finish = "{$beforeText}{$textStart}{$textFinish}{$afterText}";
-        return $finish;
+        $regexp = "{$beforeText}{$textStart}{$textFinish}{$afterText}";
+        return $regexp;
     }
 
     public function beforeText($beforeText)
     {//перед искомым текстом
         //разбор строки по кускам и замена символов типа слэша
         $strArray = str_split($beforeText);
-        //в цикле проходим по массиву символов, ищем спец. символы и заменяем их
-        $result = $this->specReplacer($strArray);
-
+        $result = $this->specCharacterReplacer($strArray); //в цикле проходим по массиву символов, ищем спец. символы и заменяем
         return $result = "(?<=$result)";
     }
 
     public function afterText($afterText)
     {//после искомого текста
         $strArray = str_split($afterText);
-        //в цикле проходим по массиву символов, ищем спец. символы и заменяем их
-        $result = $this->specReplacer($strArray);
+        $result = $this->specCharacterReplacer($strArray); //в цикле проходим по массиву символов, ищем спец. символы и заменяем
 
     return $result = "(?=$result)";
     }
@@ -47,22 +49,21 @@ class Regexp extends Model
     public function textStart($textStart)
     {//искомый текст
         $strArray = str_split($textStart); //string to array
-        $result = $this->specReplacer($strArray);
+        $result = $this->specCharacterReplacer($strArray);
 
-        return $result = "$result.*";
+        return $result;
     }
 
     public function textFinish($textFinish)
     {//Этим заканчивается искомый текст
         $strArray = str_split($textFinish);
-        //в цикле проходим по массиву символов, ищем спец. символы и заменяем их
-        $result = $this->specReplacer($strArray);
+        $result = $this->specCharacterReplacer($strArray); //в цикле проходим по массиву символов, ищем спец. символы и заменяем
 
-        return $result = "$result";
+        return $result;
     }
 
-    public function specReplacer($strArray)
-    {
+    public function specCharacterReplacer($strArray)
+    { //replace special character
         foreach ($strArray as $symbol) {
             // экранирование . ^ $ * + ? { } [ ] \ | ( )
             switch ($symbol) {

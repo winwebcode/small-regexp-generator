@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
         //dd($request);
         $regex = new Regexp();
-        $result = $regex->symbolReplacer($request);
+        $result = $regex->getRegexp($request);
 
         return view('regexp.regex', compact('result'));
     }
