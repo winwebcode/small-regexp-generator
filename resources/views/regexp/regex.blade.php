@@ -17,7 +17,7 @@
                 <textarea rows="4" cols="50">{{$result}}</textarea>
             </div>
 
-
+            {{--<p>{{summ:12345}}</p>--}}
 
         </div>
     </main>

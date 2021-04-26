@@ -14,6 +14,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
@@ -156,7 +164,7 @@
       <option name="presentableId" value="Default" />
       <updated>1619286011878</updated>
       <workItem from="1619286013035" duration="3037000" />
-      <workItem from="1619418661731" duration="3665000" />
+      <workItem from="1619418661731" duration="8782000" />
     </task>
     <servers />
   </component>
@@ -173,11 +181,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="795" y="421" key="NewPhpFileDialog" timestamp="1619286733393">
-      <screen x="0" y="0" width="1920" height="998" />
-    </state>
-    <state x="795" y="421" key="NewPhpFileDialog/0.0.1920.998@0.0.1920.998" timestamp="1619286733393" />
   </component>
 </project>
