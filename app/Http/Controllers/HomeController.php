@@ -13,9 +13,11 @@ class HomeController extends Controller
     }
     public function storeRegex(Request $request)
     {
+
+        //dd($request);
         $regex = new Regexp();
         $result = $regex->getRegexp($request);
-
+       // return $result; //for ajax
         return view('regexp.regex', compact('result'));
     }
 }
