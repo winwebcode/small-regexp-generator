@@ -7,16 +7,23 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    /**
+     * @var Regexp
+     */
+    private $regex;
+
+    public function __construct(Regexp $regex)
+    {
+        $this->regex = $regex;
+    }
+
     public function index()
     {
         return view('regexp.index');
     }
     public function storeRegex(Request $request)
     {
-
-        //dd($request);
-        $regex = new Regexp();
-        $result = $regex->getRegexp($request);
+        $result = $this->regex->getRegexp($request);
        // return $result; //for ajax
         return view('regexp.regex', compact('result'));
     }
