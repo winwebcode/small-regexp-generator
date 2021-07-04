@@ -49,7 +49,7 @@ class Regexp extends Model
         $strArray = str_split($afterText);
         $result = $this->specCharacterReplacer($strArray); //в цикле проходим по массиву символов, ищем спец. символы и заменяем
 
-    return $result = "(?=$result)";
+        return $result = "(?=$result)";
     }
 
     public function textStart($textStart)
