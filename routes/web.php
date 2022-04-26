@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/regex-complete', 'HomeController@getRegex')->name('regex.complete');
-Route::post('/regex-store', 'HomeController@storeRegex')->name('regexp.create');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/regex-store', [HomeController::class, 'storeRegex'])->name('regexp.create');

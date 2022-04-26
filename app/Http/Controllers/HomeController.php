@@ -24,7 +24,6 @@ class HomeController extends Controller
     public function storeRegex(Request $request)
     {
         $result = $this->regex->getRegexp($request);
-       // return $result; //for ajax
-        return view('regexp.regex', compact('result'));
+        return $result;
     }
 }

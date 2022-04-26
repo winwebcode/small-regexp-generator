@@ -13,26 +13,26 @@ class Regexp extends Model
     {
         //generate regexp
         if ($this->isAnyTextNull($request)) {
-            return $regexp = ".+";
+            $regexp = ".+";
         } else {
             $beforeText = $this->beforeText($request->beforeText); //перед искомым текстом
             $textStart = $this->textStart($request->textStart); //искомый текст
             $textFinish = $this->textFinish($request->textFinish);  //Этим заканчивается искомый текст
             $afterText = $this->afterText($request->afterText); //после искомого текста
 
-            if ($request->shortestMatch == "on") {
+            if ($request->shortestMatch == "true") {
                 $textFinish = "?$textFinish";
             }
 
-            if ($request->textWrap == "on") { //allow wrap
+            if ($request->textWrap == "true") { //allow wrap
                 $textStart = "{$textStart}[\w\W]*";
             } else { //no wrap
                 $textStart = "{$textStart}.*";
             }
             //сборка и возврат результата
             $regexp = "{$beforeText}{$textStart}{$textFinish}{$afterText}";
-            return $regexp;
         }
+        return $regexp;
     }
 
     public function beforeText($beforeText): string
